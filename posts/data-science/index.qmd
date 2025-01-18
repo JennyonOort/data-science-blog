@@ -1,143 +1,183 @@
 ---
-title: "A Comprehensive Guide to the Machine Learning Process"
-subtitle: "A Step-by-Step Tutorial Demonstrated with Logistic Regression Using the Pima Indians Diabetes Dataset"
+title: "Unpacking the Machine Learning Process: A Practical Step-by-Step Guide"
+subtitle: "Hands-On Demo with Logistic Regression on the Pima Indians Diabetes Dataset"
 categories: [tutorial, code, analysis]
 image: "image.jpg"
 ---
 
-Machine learning (ML) is a powerful tool for solving complex problems by identifying patterns in data. However, to build a successful machine learning model, it's essential to follow a structured process that takes raw data and transforms it into actionable insights. In this tutorial, I will walk through the essential steps of the ML process using a real-world dataset: the **Pima Indians Diabetes Dataset**.
+Machine learning (ML) is a powerful tool for solving complex problems by identifying patterns in data. However, to build a successful machine learning model, it's essential to follow a structured process that takes raw data and transforms it into actionable insights. In this tutorial, I will walk through the essential steps of the ML process using logistic regression model on a real-world dataset: the [Pima Indians Diabetes Dataset](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database) (the 'diabetes dataset').
 
-You can find all of my source code that supports this article in the GitHub repository [here](https://github.com/UBC-MDS/diabetes_predictor_py) and the final reasearch report [here](https://ubc-mds.github.io/diabetes_predictor_py/reports/diabetes_analysis.html).
+THe demo is coded in [Python](https://www.python.org/) and the primary machine learning software for modeling is [scikit-learn](https://scikit-learn.org/stable/), which is an open-source library for Python that offers an extensive range of supervised and unsupervised learning algorithms and tools for machine learning tasks. You can find all source code that supports the demo in this [GitHub repository](https://github.com/UBC-MDS/diabetes_predictor_py) and the final research report [here](https://ubc-mds.github.io/diabetes_predictor_py/reports/diabetes_analysis.html).
 
 
 ### **Step 1: Define the Problem**
 
-Before diving into code or models, the first step is always to **define the problem** clearly. Understanding the business problem or the task you are trying to solve is critical, as it determines the approach and the tools you'll use.
+Before diving into code or models, the first step is always to **define the problem** clearly. Understanding the business problem or the task we are trying to solve is critical, as it determines the approach and the tools we'll use.
 
-- **What problem are you trying to solve?**
+- **What problem are we trying to solve?**
 - **Is it a classification task, regression task, or clustering task?**
-- **What kind of data do you have, and what’s the expected output?**
+- **What kind of data do we have, and what’s the expected output?**
 
-In this tutorial and based on our example dataset, our goal is to predict whether a person has diabetes based on features like glucose levels, BMI, and age. This is a binary classification problem, where the output variable is whether or not the patient has diabetes. 
+In this guide, our goal is to predict whether a person has diabetes based on clinical features like glucose levels, BMI, and age. This is a binary classification problem, where the output variable is whether or not the patient has diabetes. 
 
-### **Step 2: Collect and Understand the Data**
+### **Step 2: Understand and Validate the Data**
 
 Machine learning models rely on high-quality data to learn and make predictions, so it is crucial to understand the data before applying any machine learning techniques. 
 
-#### Source, Collection, and Scope of Data
-The first step in understanding any dataset is to gain a high-level overview of its source, collection process, and scope. This involves answering the following questions:
+#### <u>Source, Collection, and Scope of Data</u>
+The initial stage in understanding any dataset is to get a high-level overview of its source, collection process, and scope. This includes addressing the following questions:
 
 - **Where is the data coming from?**
 - **How was the data collected?** 
 - **How many observations are there?**
 - **What relevant features are available?**
 
-By understanding these aspects, you can assess the dataset's relevance and reliability for the machine learning task at hand. For example, [**Pima Indians Diabetes Dataset**](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database) is well-aligned with the goal of predicting diabetes, as it comes from a reliable source, the National Library of Medicine, is based on standardized medical examinations, and provides a sufficient sample size with 768 observations x 8 features for meaningful model training and evaluation.
+By understanding these aspects, we can assess the dataset's relevance and reliability for the machine learning task at hand. For example, Pima Indians Diabetes Dataset is well-aligned with the goal of predicting diabetes, as it comes from a reliable source, the National Library of Medicine, is based on standardized medical examinations, and provides a sufficient sample size with 768 observations $\times$ 8 features for meaningful model training and evaluation.
 
-#### **Exploring Data Analysis**
+#### <u>Data Validation</u>
+Following the top level summary on the dataset, the next critical step is to ensures the quality, integrity, and consistency of the dataset such as checking for issues like missing values, outliers, duplicates, and adhering to expected data formats, types, and ranges. For instance, are the glucose levels within a reasonable range, or are there any negative values in fields like age or pregnancies? 
 
-Before diving into the modeling phase, it’s essential to load and explore the data. This includes checking for missing values, understanding the distribution of features, and visualizing relationships between features and the target variable. The goal here is to develop a strong understanding of the dataset's structure and characteristics. 
+Tools like the [Pandera](https://pandera.readthedocs.io/en/stable/) package can automate this process by allowing us to define validation schemas for the dataset, ensuring that each column meets predefined conditions. It is important to note that data validation focuses on identifying and addressing inherent issues in the dataset, rather than making subjective judgments or imposing interpretations on the data. This means, in the diabetes dataset, observations are removed when they contain implausible values, like nulls or zeros, in features where these values would be unrealistic (e.g., glucose or blood pressure).
 
-For example, you can analyze how glucose levels, BMI, and age are distributed for diabetic vs. non-diabetic patients. This exploration often helps identify patterns or trends that inform feature engineering later in the process.
+### **Step 3: Split the Data into Training and Testing Sets**
 
-## **Step 3: Data Preprocessing**
+Before proceeding any further with data exploration, it’s important to split the data into two subsets: one for training and one for testing. 
 
-Raw data often needs to be cleaned and transformed before it can be used in a machine learning model. This step is known as **data preprocessing** and typically includes the following actions:
+This division is essential for evaluating how well our model generalizes to unseen data. A common split is **70% for training and 30% for testing**, where the training set is used to teach the model, and the test set is reserved to measure its true performance upon the model is properly trained. Keeping the test set "locked" and untouched until the final evaluation is critical for ensuring that the model’s performance is not influenced by prior knowledge of this data. 
 
-### **Handling Missing Data**
+It is **VERY important** to perform this split early so we avoid any potential **data leakage** and adhere to the **golden rule of machine learning**: the test data cannot influence training the model in anyway. 
 
-Before building a model, it's essential to handle any missing or invalid values in the dataset. In the Pima Indians dataset, some records may contain missing values for certain features, especially glucose and insulin levels.
+### **Step 4: Exploratory Data Analysis (EDA)**
 
-You can handle missing data by:
+Once we’ve split the dataset, we can dive deeper into Exploratory Data Analysis (EDA) on the **training data**. EDA involves investigating the dataset’s structure and characteristics using both visualizations and statistical methods. By looking at key aspects such as missing values, the distribution of features, and visualizing how different features relate to the target variable, we gain a clear understanding of the data, uncover patterns, and identify any potential issues that might affect model performance.
 
-- **Removing rows with missing values** if they are few.
-- **Imputing values** for missing data, for example, by replacing missing values with the median or mean of the column.
+In our demo, @fig-feature_histograms visualized the distributions of each predictor from the diabetes training set, with the distributions color-coded by class (0: blue, 1: orange). This exploration often helps identify patterns or trends that inform [feature engineering](#feature-engineering) later in the process. 
 
-### **Feature Scaling**
+![Comparison of the empirical distributions of training data predictors between those non-diabetic and diabetic. Image by Author.](figures/feature_histograms.png){#fig-feature_histograms width=80%}
 
-Many machine learning algorithms, including logistic regression, benefit from scaling the features to a similar range. This ensures that one feature (e.g., age) doesn’t disproportionately influence the model compared to other features (e.g., glucose).
+Moroever, we also examined correlation among the predictors (@fig-correlation_heatmap) to identify multicollinearity, which could cause problems when performing logistic regression. No multicollinearity was detected, as the highest correlation between predictors is below the 0.7 threshold.
 
-Feature scaling is typically done through **standardization** or **normalization**. Standardization ensures that each feature has a mean of 0 and a standard deviation of 1.
+![Pearson and Spearman correlations across all features. Image by Author.](figures/correlation_heatmap.png){#fig-correlation_heatmap width=80%}
 
-### **Feature Engineering**
+### **Step 5: Data Preprocessing**
 
-Feature engineering refers to creating new features from existing ones to better represent the underlying patterns in the data. This could include creating polynomial features, encoding categorical variables, or even aggregating multiple features.
+This phase, known as data preprocessing, involves cleaning and transforming the raw data to make it suitable for machine learning algorithms. It includes handling missing values, transforming features, and performing feature engineering. Proper data preprocessing is crucial as it directly impacts the performance and accuracy of the machine learning model.
 
-In our case, the dataset already contains structured numeric data, but feature engineering could involve interaction terms or transformations to better capture relationships between features.
+#### <u>Handling Missing Data</u>
+Addressing missing or invalid data is one of the first preprocessing tasks. Typically missing data is handled by:
 
-## **Step 4: Split the Data into Training and Testing Sets**
+- **Removing rows** with missing values if they are few and don't significantly affect the dataset.
+- **Imputing missing values** using a statistical method, such as replacing them with the median, mean, or mode of the feature, or more sophisticated techniques such as predictive imputation. 
 
-To evaluate how well your model generalizes to new, unseen data, it’s important to split the data into two subsets: one for training and one for testing.
+Choosing the right approach for missing data depends on the nature of the dataset and the amount of missing data present.
 
-A common split is **70% for training and 30% for testing**. The training set is used to train the model, while the test set is kept aside until the end to evaluate the model’s performance. In addition to this, it’s often useful to create a **validation set** for hyperparameter tuning.
+#### <u>Feature Transformation</u>
 
-## **Step 5: Choose a Model**
+Feature transformation ensures that different types of data are appropriately scaled or encoded so that machine learning algorithms can interpret them correctly. The methods used vary depending on the type of data: numeric, categorical, and textual.
 
-Once the data is cleaned and preprocessed, the next step is to select a machine learning model. The choice of model depends on the problem type, the nature of the data, and the available computational resources.
+*1. Numeric Data*
 
-In this case, since we’re dealing with a binary classification problem, we chose **Logistic Regression**. Logistic regression is a simple and effective model for binary classification problems and is easy to interpret. It models the probability of a binary outcome based on the input features.
+For numeric data, many machine learning algorithms benefit from scaling the features to a similar range. This helps ensure that one feature does not disproportionately influence the model compared to other features. Common approaches to numeric feature transformation include:
 
-There are other models that could be used here, such as **Decision Trees**, **Random Forests**, or **Support Vector Machines (SVM)**, but logistic regression is a good starting point for binary classification tasks.
+- **Standardization:** Rescales features to have a mean of 0 and a standard deviation of 1, often used for algorithms like logistic regression.
+- **Normalization:** Scales features to a fixed range (e.g., 0 to 1), commonly used in distance-based algorithms like k-nearest neighbors (k-NN) model.
 
-## **Step 6: Train the Model**
+*2. Categorical Data (Nominal and Ordinal)*
 
-Once you’ve selected the model, it’s time to train it on the training data. Training involves feeding the features and corresponding target values to the model so that it can learn the patterns and relationships between them.
+Categorical data consists of non-numeric values that represent discrete categories or labels, which cannot be directly used by machine learning models. Common methods of transformtion include:
 
-For logistic regression, the model will find the best-fit coefficients for the features to minimize the cost function (e.g., the log-loss function). The goal is to optimize the model to make accurate predictions for new data.
+- **One-Hot Encoding:** This method creates binary (0 or 1) columns for each category, turning a single categorical feature with multiple categories into several binary features. This is often used for nominal data, where the categories do not have a meaningful order (e.g., "female" vs. "male").
+- **Label Encoding:** This approach converts each category into a numeric label, which is suitable for ordinal data where there is a meaningful order (e.g., "low", "medium", "high"). 
 
-### **Hyperparameter Tuning**
+*3. Text Data*
 
-For many machine learning models, there are hyperparameters that need to be tuned to optimize performance. For logistic regression, one important hyperparameter is **C**, which controls the regularization strength (the trade-off between fitting the data well and preventing overfitting).
+Raw text data, such as sentences, documents, or reviews, contains valuable information but cannot be directly interpreted by algorithms. Feature transformation techniques are used to convert text into a numerical format for machine learning models to process effectively. 
 
-You can use methods like **Grid Search** or **Randomized Search** to find the optimal value of C that minimizes the model's error rate. This is crucial for improving model performance and preventing overfitting or underfitting.
+- **Bag-of-Words:** Transforms text into numerical features by counting word occurrences in documents, creating a sparse matrix.
+- **TF-IDF (Term Frequency-Inverse Document Frequency):** Weighs word frequencies by their importance across the dataset, down-weighting common words like "the" and "is."
 
-## **Step 7: Evaluate the Model**
+#### <u>Feature Engineering</u>
 
-After training the model, it’s essential to evaluate its performance on the test set. Evaluation allows us to measure how well the model generalizes to unseen data.
+Feature engineering refers creating new features from the existing dataset to better represent the underlying patterns in the data. This step is often key to improving the predictive power of the model. This often includes creating interaction terms (e.g. squared or cubic terms), adding polynomial features, and sometimes aggregating multiple features. 
 
-### **Accuracy and Confusion Matrix**
+In our case, the diabetes dataset already contains structured numeric data that only required scaling, but feature engineering such as interaction terms could have been explored to better capture relationships between features.
 
-For classification tasks, a common evaluation metric is **accuracy**, which measures the proportion of correctly classified instances. However, accuracy alone might not provide a full picture, especially if the dataset is imbalanced (as in our case with more non-diabetic patients than diabetic ones).
+***Important Note on Data Integrity***
 
-To better understand the model’s performance, we use a **confusion matrix**, which breaks down the predictions into four categories:
+The procedures and techniques in this section highlight why it's crucial to [split the data](#step-3-split-the-data-into-training-and-testing-sets) before starting any preprocessing. For example, imagine applying a feature scaling technique like standardization, where we calculate the mean and standard deviation of a feature. If we compute these statistics using both the training and testing data, we would inadvertently introduce information from the test set into the training process, resulting in data leakage by giving the model an unfair advantage and inflating its performance. 
 
-- **True Positives (TP)**: Correctly predicted diabetic cases
-- **True Negatives (TN)**: Correctly predicted non-diabetic cases
-- **False Positives (FP)**: Non-diabetic cases incorrectly predicted as diabetic
-- **False Negatives (FN)**: Diabetic cases incorrectly predicted as non-diabetic
+By splitting the data first, we ensure the integrity of the test set for unbiased evaluation is preserved. Mechanically, we fit the transformation models (such as scaling or encoding) only on the training data, and then apply the same transformations to both the training and testing data, ensuring consistency without contaminating the test set.
 
-The confusion matrix helps us calculate additional metrics, such as **Precision**, **Recall**, and the **F1-Score**, which give a more nuanced understanding of the model's strengths and weaknesses.
+### **Step 6: Choose a Model**
 
-### **Precision, Recall, and F1-Score**
+At this stage, choose a **machine learning model** to solve our problem. The choice of model depends on the problem type, the nature of the data, and the available computational resources.
 
-- **Precision** measures how many of the positive predictions are actually correct.
-- **Recall** measures how many actual positive cases were correctly identified.
-- **F1-Score** is the harmonic mean of Precision and Recall and provides a balanced measure of a model’s performance when there’s an imbalance between classes.
+- **Classification problems**: [Logistic regression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html), [decision trees](https://scikit-learn.org/stable/modules/tree.html), [random forests](https://scikit-learn.org/stable/modules/ensemble.html#random-forests-and-other-randomized-tree-ensembles), [support vector machines (SVM)](https://scikit-learn.org/stable/modules/svm.html), [k-NN](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html), etc.
+- **Regression problems**: [Linear regression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html), decision trees, random forests, etc.
+- **Clustering problems**: [K-means](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html), [DBSCAN](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html), [hierarchical clustering](https://scikit-learn.org/stable/modules/clustering.html#hierarchical-clustering), etc.
 
-### **ROC Curve and AUC**
+For this tutorial, we chose **Logistic Regression**, a simple yet powerful model for binary classification tasks. It models the probability of a binary outcome (e.g. diabetic vs. non-diabetic) based on the input features. 
 
-The **Receiver Operating Characteristic (ROC) Curve** and **Area Under the Curve (AUC)** are useful for evaluating binary classifiers. The ROC curve plots the True Positive Rate (Recall) against the False Positive Rate. AUC is the area under this curve, where a higher AUC indicates better model performance.
+### **Step 7: Train the Model**
 
-## **Step 8: Refine the Model**
+Once we’ve selected the model, it’s time to train it on the training data. Training involves feeding the features and corresponding target values to the model so that it can learn the patterns and relationships between them.
 
-After evaluating the model, you might find areas for improvement. This could involve:
+#### <u>Cross Validation</u>
+Typically, we use cross-validation technique during training to improve the generalization ability of a machine learning model. It works by splitting the training data into multiple subsets, training the model on some folds, and validating it on the remaining fold. This process is repeated for each fold, and the average performance (along with standard deviation) is used to assess the model. Cross-validation helps mitigate overfitting and provides a more reliable estimate of the model's performance on unseen data.
 
-- **Feature Engineering**: Trying new features or transformations
-- **Hyperparameter Tuning**: Using more advanced techniques like cross-validation to fine-tune the model’s parameters
-- **Trying Different Models**: If logistic regression doesn’t perform well, you might try models like Random Forests or Gradient Boosting.
+#### <u>Hyperparameter Tuning</u>
+For many machine learning models, there are hyperparameters that need to be tuned to optimize performance. Unlike model parameters, which are learned during training, hyperparameters are set before training and control the model's learning process. Examples of hyperparameters include the learning rate in gradient descent, the number of trees in a random forest, or the regularization strength in logistic regression. Fine-tuning these hyperparameters can significantly impact the model's ability to generalize to unseen data. 
 
-## **Step 9: Deploy the Model**
+Common techniques for hyperparameter tuning include: 
 
-Once your model is refined and performing well, it’s time to deploy it into a production environment. In a real-world scenario, this could involve:
+- **Grid Search**, where a predefined set of hyperparameters is tested exhaustively
+- **Random Search**, which samples hyperparameters randomly from a specified range. 
+- **Advanced techniques** such as [Bayesian optimization](https://github.com/bayesian-optimization/BayesianOptimization), [genetic algorithms (GA)](https://medium.com/@byanalytixlabs/a-complete-guide-to-genetic-algorithm-advantages-limitations-more-738e87427dbb), [hyperband](https://2020blogfor.github.io/posts/2020/04/hyperband/), etc.
 
-- Building an application or API that uses the model to make predictions in real time.
-- Monitoring the model’s performance over time to ensure it continues to perform well with new data.
-- Updating the model periodically with new data to ensure it remains accurate and effective.
+In the demo, the goal is to optimize the model to make accurate predictions for new data. The model finds the best-fit coefficients for the features to minimize the cost function (e.g., the log-loss function) for logistic regression. We've using `RandomizedSearchCV` to find the optimal regularization strength that minimizes the model's error rate.
 
-## **Conclusion**
+### **Step 8: Evaluate the Model**
 
-In this tutorial, we've walked through the entire machine learning process, , using the Pima Indians Diabetes Dataset as a practical example. We discussed how to define the problem, collect and preprocess data, train a logistic regression model, evaluate its performance, and refine it for better accuracy. Each of these steps is crucial in building an effective machine learning model that can be used for real-world applications.
+After training the model, it’s essential to evaluate its performance on the test set. Evaluation allows us to measure how well the model generalizes to new, unseen data.
 
-The Pima Indians dataset demonstrated that logistic regression is a useful tool for binary classification problems, but it also showed the importance of feature selection, hyperparameter tuning, and model evaluation in achieving the best possible results.
+#### <u>Evaluation Metrics</u>
+Evaluation metrics help quantify this generalization by comparing the model’s predictions against the true outcomes. The choice of evaluation metrics depends on the type of problem and the characteristics of the data.
 
-Machine learning is an iterative process that requires experimentation and refinement. As you progress in your data science journey, these foundational steps will serve as a guide to solving increasingly complex problems and making data-driven decisions.
+- **Classification Metrics:** accuracy, precision, recall, f1-score, fbeta-score, ROC curve and AUC, PR curve and AP
+- **Regression Metrics:** mean squared error (MSE), mean absolute error (MAE), mean absolute percentage error (mape), and R-squared ($R^2$)
+- **Clustering Metrics:** Clustering is an unsupervised learning task, and its evaluation metrics typically focus on measuring the similarity or compactness of the clusters formed. Evaluation metrics can be categorized into internal metrics, which assess clustering quality based solely on the data itself, and external metrics, which compare the clusters to pre-defined categories or ground truth.
+    * <u>_Internal metrics:_</u> silhouette score, Davies-Bouldin index, and Dunn index
+    * <u>_External metrics:_</u> Adjusted Rand Index (ARI), Normalized Mutual Information (NMI), and Fowlkes-Mallows Index (FMI) 
+
+Generally, accuracy for classification and mean squared error (MSE) for regression are set as default evaluation metrics in most machine learning software packages.
+
+For the sample analysis, the model reported an accuracy score of 75%. More in depth evaluation of test set predictions include confusion matrix (@fig-test_confusion_matrix), PR curve (@fig-test_pr), and (@fig-test_roc). 
+
+![Confusion matrix of test set prediction accuracy. Image by Author](figures/confusion_matrix_plot.png){#fig-test_confusion_matrix width=60%}
+
+![Precision recall curve and AP score of test set predictions. Image by Author.](figures/precision_recall_plot.png){#fig-test_pr width=60%}
+
+![ROC Curve and AUC score of test set predictions](figures/roc_curve.png){#fig-test_roc width=60%}
+
+### **Step 9: Refine the Model**
+After evaluating the model, we might find areas for improvement. This could involve:
+
+- [**Feature Engineering:**](#feature-engineering) Trying new features or transformations
+- [**Hyperparameter Tuning:**](#hyperparameter-tuning) Using more advanced techniques to fine-tune the model’s parameters
+- **Trying Different Models:** Experimenting other models if the chosen doesn’t perform well
+
+### **Step 10: Deploy the Model**
+
+Once our model is refined and performing well, the next step is to deploy it in a real-world scenario, which typically involves the following steps:
+
+- **Integrate the model into an application or API:** This allows the model to make predictions either in real time or in batch mode, depending on the specific needs of the system.
+- **Monitor the model’s performance:** Continuously tracking the model’s effectiveness on new data helps identify any performance drops or changes in data patterns.
+- **Periodic model updates:** The model may need to be retrained with new data or fine-tuned to maintain its accuracy and relevance as conditions evolve.
+
+Our demo has skipped through [step 9](#step-9-refine-the-model) and [10](#step-10-deploy-the-model), as the project was designed solely for academic and tutorial purposes. Consequently, the results achieved are not intended to be final or satisfactory for production use.
+
+### **Conclusion**
+
+In this tutorial, we’ve covered the complete machine learning process using the Pima Indians Diabetes Dataset as a practical example. We explored how to define the problem, collect, split, and preprocess the data, train a model, evaluate its performance, and refine it for improved performance. Each of these steps is essential for building a robust machine learning model capable of solving real-world problems.
+
+Machine learning is an iterative and evolving process that involves continuous experimentation and refinement. As you advance in your data science journey, the principles outlined in this tutorial will guide you in tackling more complex challenges and making data-driven decisions.
