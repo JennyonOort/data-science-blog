@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -191,7 +211,7 @@ window.Quarto = {
 
 
 <p><img src="img/banner_word.png" class="img-fluid"></p>
-<p>In recent years, data has been heralded as the world’s most valuable resource, surpassing even oil in importance. Organizations across all industries are making significant investments in data and analytics, with machine learning (ML) and AI being key drivers of IT spending. While these technologies offer a competitive edge, they also come with risks—mistakes driven by machine learning models can have serious consequences, from damaging an organization’s reputation to impacting revenue or even human lives. Therefore, it is crucial not only to understand the data but also to ensure the tools used are well-understood and aligned with the organization’s values. A structured, well-defined machine learning process is essential to mitigate risks and maximize the potential of these powerful technologies, ensuring responsible and effective use throughout.</p>
+<p>In recent years, data has been heralded as the world’s most valuable resource, surpassing even oil in importance <span class="citation" data-cites="economist">(<a href="#ref-economist" role="doc-biblioref">Economist 2017</a>)</span>. Organizations across all industries are making significant investments in data and analytics, with machine learning (ML) and AI being key drivers of IT spending <span class="citation" data-cites="cio_ai_inv">(<a href="#ref-cio_ai_inv" role="doc-biblioref">Stackpole 2023</a>)</span>. While these technologies offer a competitive edge, they also come with risks—mistakes driven by machine learning models can have serious consequences, from damaging an organization’s reputation to impacting revenue or even human lives <span class="citation" data-cites="cio_ai_disaster">(<a href="#ref-cio_ai_disaster" role="doc-biblioref">Olavsrud 2024</a>)</span>. Therefore, it is crucial not only to understand the data but also to ensure the tools used are well-understood and aligned with the organization’s values. A structured, well-defined machine learning process is essential to mitigate risks and maximize the potential of these powerful technologies, ensuring responsible and effective use throughout.</p>
 <p>In this tutorial, I will walk through the essential steps of the ML process using logistic regression model on a real-world dataset: the <a href="https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database">Pima Indians Diabetes Dataset</a> (the diabetes dataset). THe demo is coded in <a href="https://www.python.org/">Python</a> and the primary machine learning software for modeling is <a href="https://scikit-learn.org/stable/">scikit-learn</a>, which is an open-source library for Python that offers an extensive range of supervised and unsupervised learning algorithms and tools for machine learning tasks. You can find all source code that supports the demo in this <a href="https://github.com/UBC-MDS/diabetes_predictor_py">GitHub repository</a> and the final research report <a href="https://ubc-mds.github.io/diabetes_predictor_py/reports/diabetes_analysis.html">here</a>.</p>
 <section id="step-1-define-the-problem" class="level3">
 <h3 class="anchored" data-anchor-id="step-1-define-the-problem"><strong>Step 1: Define the Problem</strong></h3>
@@ -419,11 +439,25 @@ Figure&nbsp;7: Machine learning complete process flowchart. Image by Author
 </figcaption>
 </figure>
 </div>
+<section id="references" class="level4">
+
+
 
 
 </section>
+</section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-economist" class="csl-entry" role="listitem">
+Economist, The. 2017. <span>“The World’s Most Valuable Resource Is No Longer Oil, but Data.”</span> <a href="https://www.economist.com/leaders/2017/05/06/the-worlds-most-valuable-resource-is-no-longer-oil-but-data" class="uri">https://www.economist.com/leaders/2017/05/06/the-worlds-most-valuable-resource-is-no-longer-oil-but-data</a>.
+</div>
+<div id="ref-cio_ai_disaster" class="csl-entry" role="listitem">
+Olavsrud, Thor. 2024. <span>“12 Famous AI Disasters.”</span> <a href="https://www.cio.com/article/190888/5-famous-analytics-and-ai-disasters.html" class="uri">https://www.cio.com/article/190888/5-famous-analytics-and-ai-disasters.html</a>.
+</div>
+<div id="ref-cio_ai_inv" class="csl-entry" role="listitem">
+Stackpole, Beth. 2023. <span>“State of the CIO, 2023: Building Business Strategy.”</span> <a href="https://www.cio.com/article/465327/state-of-the-cio-2023-building-business-strategy.html" class="uri">https://www.cio.com/article/465327/state-of-the-cio-2023-building-business-strategy.html</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
