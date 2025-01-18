@@ -9,7 +9,7 @@
 <meta name="author" content="Harlow Malloc">
 <meta name="dcterms.date" content="2025-01-16">
 
-<title>Post With Code – blog</title>
+<title>Post With Code – Jenny Zhang’s Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">blog</span>
+    <span class="navbar-title">Jenny Zhang’s Blog</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -117,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="quarto-title column-body">
       <h1 class="title">Post With Code</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">news</div>
+                <div class="quarto-category">tutorial</div>
                 <div class="quarto-category">code</div>
                 <div class="quarto-category">analysis</div>
               </div>
@@ -156,9 +156,133 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is a post with executable code.</p>
+<p>Machine learning (ML) is a powerful tool for solving complex problems by identifying patterns in data. However, to build a successful machine learning model, it’s essential to follow a structured process that takes raw data and transforms it into actionable insights. In this tutorial, we’ll walk through the entire machine learning process, from defining the problem to evaluating the model, using a real-world dataset—specifically, the <strong>Pima Indians Diabetes Dataset</strong>.</p>
+<p>The Pima Indians dataset is a popular dataset in the data science community, used to predict whether a person has diabetes based on several clinical features such as glucose levels, BMI, age, and blood pressure. By following this tutorial, you’ll gain insights into how each step of the machine learning process works and how to apply it to a real dataset.</p>
+<hr>
+<section id="step-1-define-the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-define-the-problem"><strong>Step 1: Define the Problem</strong></h2>
+<p>The first step in any machine learning project is to clearly define the problem you’re trying to solve. Without a well-defined problem, it’s impossible to identify what type of model to use or how to evaluate success. In this tutorial, the problem is:</p>
+<p><strong>“Can we predict whether a woman has diabetes based on her clinical features?”</strong></p>
+<p>This is a binary classification problem, where the output variable is whether or not the patient has diabetes. The output variable, known as the <strong>target variable</strong>, has two classes: 0 (no diabetes) or 1 (diabetes).</p>
+</section>
+<section id="step-2-collect-and-understand-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-collect-and-understand-the-data"><strong>Step 2: Collect and Understand the Data</strong></h2>
+<p>Before applying any machine learning techniques, it’s crucial to understand the data you’re working with. The <strong>Pima Indians Diabetes Dataset</strong> contains data for 768 female patients, each with 8 features:</p>
+<ul>
+<li><strong>Pregnancies</strong>: Number of pregnancies</li>
+<li><strong>Glucose</strong>: Plasma glucose concentration (a measure of blood sugar)</li>
+<li><strong>Blood Pressure</strong>: Diastolic blood pressure (mm Hg)</li>
+<li><strong>Skin Thickness</strong>: Triceps skinfold thickness (mm)</li>
+<li><strong>Insulin</strong>: Serum insulin level (mu U/ml)</li>
+<li><strong>BMI</strong>: Body mass index (weight in kg / height in meters squared)</li>
+<li><strong>Diabetes Pedigree Function</strong>: A family history score for diabetes</li>
+<li><strong>Age</strong>: Age of the patient (in years)</li>
+</ul>
+<p>The target variable is <strong>Outcome</strong>, which is a binary value: 1 if the patient has diabetes, 0 if not.</p>
+<section id="exploring-the-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-the-dataset"><strong>Exploring the Dataset</strong></h3>
+<p>Before diving into the modeling phase, it’s essential to load and explore the data. This includes checking for missing values, understanding the distribution of features, and visualizing relationships between features and the target variable. The goal here is to develop a strong understanding of the dataset’s structure and characteristics.</p>
+<p>For example, you can analyze how glucose levels, BMI, and age are distributed for diabetic vs.&nbsp;non-diabetic patients. This exploration often helps identify patterns or trends that inform feature engineering later in the process.</p>
+</section>
+</section>
+<section id="step-3-data-preprocessing" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-data-preprocessing"><strong>Step 3: Data Preprocessing</strong></h2>
+<p>Raw data often needs to be cleaned and transformed before it can be used in a machine learning model. This step is known as <strong>data preprocessing</strong> and typically includes the following actions:</p>
+<section id="handling-missing-data" class="level3">
+<h3 class="anchored" data-anchor-id="handling-missing-data"><strong>Handling Missing Data</strong></h3>
+<p>Before building a model, it’s essential to handle any missing or invalid values in the dataset. In the Pima Indians dataset, some records may contain missing values for certain features, especially glucose and insulin levels.</p>
+<p>You can handle missing data by:</p>
+<ul>
+<li><strong>Removing rows with missing values</strong> if they are few.</li>
+<li><strong>Imputing values</strong> for missing data, for example, by replacing missing values with the median or mean of the column.</li>
+</ul>
+</section>
+<section id="feature-scaling" class="level3">
+<h3 class="anchored" data-anchor-id="feature-scaling"><strong>Feature Scaling</strong></h3>
+<p>Many machine learning algorithms, including logistic regression, benefit from scaling the features to a similar range. This ensures that one feature (e.g., age) doesn’t disproportionately influence the model compared to other features (e.g., glucose).</p>
+<p>Feature scaling is typically done through <strong>standardization</strong> or <strong>normalization</strong>. Standardization ensures that each feature has a mean of 0 and a standard deviation of 1.</p>
+</section>
+<section id="feature-engineering" class="level3">
+<h3 class="anchored" data-anchor-id="feature-engineering"><strong>Feature Engineering</strong></h3>
+<p>Feature engineering refers to creating new features from existing ones to better represent the underlying patterns in the data. This could include creating polynomial features, encoding categorical variables, or even aggregating multiple features.</p>
+<p>In our case, the dataset already contains structured numeric data, but feature engineering could involve interaction terms or transformations to better capture relationships between features.</p>
+</section>
+</section>
+<section id="step-4-split-the-data-into-training-and-testing-sets" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-split-the-data-into-training-and-testing-sets"><strong>Step 4: Split the Data into Training and Testing Sets</strong></h2>
+<p>To evaluate how well your model generalizes to new, unseen data, it’s important to split the data into two subsets: one for training and one for testing.</p>
+<p>A common split is <strong>70% for training and 30% for testing</strong>. The training set is used to train the model, while the test set is kept aside until the end to evaluate the model’s performance. In addition to this, it’s often useful to create a <strong>validation set</strong> for hyperparameter tuning.</p>
+</section>
+<section id="step-5-choose-a-model" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-choose-a-model"><strong>Step 5: Choose a Model</strong></h2>
+<p>Once the data is cleaned and preprocessed, the next step is to select a machine learning model. The choice of model depends on the problem type, the nature of the data, and the available computational resources.</p>
+<p>In this case, since we’re dealing with a binary classification problem, we chose <strong>Logistic Regression</strong>. Logistic regression is a simple and effective model for binary classification problems and is easy to interpret. It models the probability of a binary outcome based on the input features.</p>
+<p>There are other models that could be used here, such as <strong>Decision Trees</strong>, <strong>Random Forests</strong>, or <strong>Support Vector Machines (SVM)</strong>, but logistic regression is a good starting point for binary classification tasks.</p>
+</section>
+<section id="step-6-train-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="step-6-train-the-model"><strong>Step 6: Train the Model</strong></h2>
+<p>Once you’ve selected the model, it’s time to train it on the training data. Training involves feeding the features and corresponding target values to the model so that it can learn the patterns and relationships between them.</p>
+<p>For logistic regression, the model will find the best-fit coefficients for the features to minimize the cost function (e.g., the log-loss function). The goal is to optimize the model to make accurate predictions for new data.</p>
+<section id="hyperparameter-tuning" class="level3">
+<h3 class="anchored" data-anchor-id="hyperparameter-tuning"><strong>Hyperparameter Tuning</strong></h3>
+<p>For many machine learning models, there are hyperparameters that need to be tuned to optimize performance. For logistic regression, one important hyperparameter is <strong>C</strong>, which controls the regularization strength (the trade-off between fitting the data well and preventing overfitting).</p>
+<p>You can use methods like <strong>Grid Search</strong> or <strong>Randomized Search</strong> to find the optimal value of C that minimizes the model’s error rate. This is crucial for improving model performance and preventing overfitting or underfitting.</p>
+</section>
+</section>
+<section id="step-7-evaluate-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="step-7-evaluate-the-model"><strong>Step 7: Evaluate the Model</strong></h2>
+<p>After training the model, it’s essential to evaluate its performance on the test set. Evaluation allows us to measure how well the model generalizes to unseen data.</p>
+<section id="accuracy-and-confusion-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="accuracy-and-confusion-matrix"><strong>Accuracy and Confusion Matrix</strong></h3>
+<p>For classification tasks, a common evaluation metric is <strong>accuracy</strong>, which measures the proportion of correctly classified instances. However, accuracy alone might not provide a full picture, especially if the dataset is imbalanced (as in our case with more non-diabetic patients than diabetic ones).</p>
+<p>To better understand the model’s performance, we use a <strong>confusion matrix</strong>, which breaks down the predictions into four categories:</p>
+<ul>
+<li><strong>True Positives (TP)</strong>: Correctly predicted diabetic cases</li>
+<li><strong>True Negatives (TN)</strong>: Correctly predicted non-diabetic cases</li>
+<li><strong>False Positives (FP)</strong>: Non-diabetic cases incorrectly predicted as diabetic</li>
+<li><strong>False Negatives (FN)</strong>: Diabetic cases incorrectly predicted as non-diabetic</li>
+</ul>
+<p>The confusion matrix helps us calculate additional metrics, such as <strong>Precision</strong>, <strong>Recall</strong>, and the <strong>F1-Score</strong>, which give a more nuanced understanding of the model’s strengths and weaknesses.</p>
+</section>
+<section id="precision-recall-and-f1-score" class="level3">
+<h3 class="anchored" data-anchor-id="precision-recall-and-f1-score"><strong>Precision, Recall, and F1-Score</strong></h3>
+<ul>
+<li><strong>Precision</strong> measures how many of the positive predictions are actually correct.</li>
+<li><strong>Recall</strong> measures how many actual positive cases were correctly identified.</li>
+<li><strong>F1-Score</strong> is the harmonic mean of Precision and Recall and provides a balanced measure of a model’s performance when there’s an imbalance between classes.</li>
+</ul>
+</section>
+<section id="roc-curve-and-auc" class="level3">
+<h3 class="anchored" data-anchor-id="roc-curve-and-auc"><strong>ROC Curve and AUC</strong></h3>
+<p>The <strong>Receiver Operating Characteristic (ROC) Curve</strong> and <strong>Area Under the Curve (AUC)</strong> are useful for evaluating binary classifiers. The ROC curve plots the True Positive Rate (Recall) against the False Positive Rate. AUC is the area under this curve, where a higher AUC indicates better model performance.</p>
+</section>
+</section>
+<section id="step-8-refine-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="step-8-refine-the-model"><strong>Step 8: Refine the Model</strong></h2>
+<p>After evaluating the model, you might find areas for improvement. This could involve:</p>
+<ul>
+<li><strong>Feature Engineering</strong>: Trying new features or transformations</li>
+<li><strong>Hyperparameter Tuning</strong>: Using more advanced techniques like cross-validation to fine-tune the model’s parameters</li>
+<li><strong>Trying Different Models</strong>: If logistic regression doesn’t perform well, you might try models like Random Forests or Gradient Boosting.</li>
+</ul>
+</section>
+<section id="step-9-deploy-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="step-9-deploy-the-model"><strong>Step 9: Deploy the Model</strong></h2>
+<p>Once your model is refined and performing well, it’s time to deploy it into a production environment. In a real-world scenario, this could involve:</p>
+<ul>
+<li>Building an application or API that uses the model to make predictions in real time.</li>
+<li>Monitoring the model’s performance over time to ensure it continues to perform well with new data.</li>
+<li>Updating the model periodically with new data to ensure it remains accurate and effective.</li>
+</ul>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion"><strong>Conclusion</strong></h2>
+<p>In this tutorial, we’ve walked through the entire machine learning process, , using the Pima Indians Diabetes Dataset as a practical example. We discussed how to define the problem, collect and preprocess data, train a logistic regression model, evaluate its performance, and refine it for better accuracy. Each of these steps is crucial in building an effective machine learning model that can be used for real-world applications.</p>
+<p>The Pima Indians dataset demonstrated that logistic regression is a useful tool for binary classification problems, but it also showed the importance of feature selection, hyperparameter tuning, and model evaluation in achieving the best possible results.</p>
+<p>Machine learning is an iterative process that requires experimentation and refinement. As you progress in your data science journey, these foundational steps will serve as a guide to solving increasingly complex problems and making data-driven decisions.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
