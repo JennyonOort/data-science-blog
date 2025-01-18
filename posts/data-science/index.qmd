@@ -1,11 +1,10 @@
 ---
-title: "Post With Code"
-author: "Harlow Malloc"
-date: "2025-01-16"
+title: "A Comprehensive Guide to the Machine Learning Process: A Step-by-Step Tutorial"
+author: "Yuci Jenny Zhang"
+date: "2025-01-18"
 categories: [tutorial, code, analysis]
 tags: [Data Science, Machine Learning, Logistic Regression, Classification, Pima Indians Diabetes Dataset]
 image: "image.jpg"
-format: html
 ---
 
 Machine learning (ML) is a powerful tool for solving complex problems by identifying patterns in data. However, to build a successful machine learning model, it's essential to follow a structured process that takes raw data and transforms it into actionable insights. In this tutorial, we’ll walk through the entire machine learning process, from defining the problem to evaluating the model, using a real-world dataset—specifically, the **Pima Indians Diabetes Dataset**.
