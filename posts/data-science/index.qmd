@@ -1,44 +1,42 @@
 ---
-title: "A Comprehensive Guide to the Machine Learning Process: A Step-by-Step Tutorial"
-author: "Yuci Jenny Zhang"
-date: "2025-01-18"
+title: "A Comprehensive Guide to the Machine Learning Process"
+subtitle: "A Step-by-Step Tutorial Demonstrated with Logistic Regression Using the Pima Indians Diabetes Dataset"
 categories: [tutorial, code, analysis]
-tags: [Data Science, Machine Learning, Logistic Regression, Classification, Pima Indians Diabetes Dataset]
 image: "image.jpg"
 ---
 
-Machine learning (ML) is a powerful tool for solving complex problems by identifying patterns in data. However, to build a successful machine learning model, it's essential to follow a structured process that takes raw data and transforms it into actionable insights. In this tutorial, we’ll walk through the entire machine learning process, from defining the problem to evaluating the model, using a real-world dataset—specifically, the **Pima Indians Diabetes Dataset**.
+Machine learning (ML) is a powerful tool for solving complex problems by identifying patterns in data. However, to build a successful machine learning model, it's essential to follow a structured process that takes raw data and transforms it into actionable insights. In this tutorial, I will walk through the essential steps of the ML process using a real-world dataset: the **Pima Indians Diabetes Dataset**.
 
-The Pima Indians dataset is a popular dataset in the data science community, used to predict whether a person has diabetes based on several clinical features such as glucose levels, BMI, age, and blood pressure. By following this tutorial, you'll gain insights into how each step of the machine learning process works and how to apply it to a real dataset.
+You can find all of my source code that supports this article in the GitHub repository [here](https://github.com/UBC-MDS/diabetes_predictor_py) and the final reasearch report [here](https://ubc-mds.github.io/diabetes_predictor_py/reports/diabetes_analysis.html).
 
----
 
-## **Step 1: Define the Problem**
+### **Step 1: Define the Problem**
 
-The first step in any machine learning project is to clearly define the problem you're trying to solve. Without a well-defined problem, it’s impossible to identify what type of model to use or how to evaluate success. In this tutorial, the problem is:
+Before diving into code or models, the first step is always to **define the problem** clearly. Understanding the business problem or the task you are trying to solve is critical, as it determines the approach and the tools you'll use.
 
-**"Can we predict whether a woman has diabetes based on her clinical features?"**
+- **What problem are you trying to solve?**
+- **Is it a classification task, regression task, or clustering task?**
+- **What kind of data do you have, and what’s the expected output?**
 
-This is a binary classification problem, where the output variable is whether or not the patient has diabetes. The output variable, known as the **target variable**, has two classes: 0 (no diabetes) or 1 (diabetes).
+In this tutorial and based on our example dataset, our goal is to predict whether a person has diabetes based on features like glucose levels, BMI, and age. This is a binary classification problem, where the output variable is whether or not the patient has diabetes. 
 
-## **Step 2: Collect and Understand the Data**
+### **Step 2: Collect and Understand the Data**
 
-Before applying any machine learning techniques, it's crucial to understand the data you're working with. The **Pima Indians Diabetes Dataset** contains data for 768 female patients, each with 8 features:
+Machine learning models rely on high-quality data to learn and make predictions, so it is crucial to understand the data before applying any machine learning techniques. 
 
-- **Pregnancies**: Number of pregnancies
-- **Glucose**: Plasma glucose concentration (a measure of blood sugar)
-- **Blood Pressure**: Diastolic blood pressure (mm Hg)
-- **Skin Thickness**: Triceps skinfold thickness (mm)
-- **Insulin**: Serum insulin level (mu U/ml)
-- **BMI**: Body mass index (weight in kg / height in meters squared)
-- **Diabetes Pedigree Function**: A family history score for diabetes
-- **Age**: Age of the patient (in years)
+#### Source, Collection, and Scope of Data
+The first step in understanding any dataset is to gain a high-level overview of its source, collection process, and scope. This involves answering the following questions:
 
-The target variable is **Outcome**, which is a binary value: 1 if the patient has diabetes, 0 if not.
+- **Where is the data coming from?**
+- **How was the data collected?** 
+- **How many observations are there?**
+- **What relevant features are available?**
 
-### **Exploring the Dataset**
+By understanding these aspects, you can assess the dataset's relevance and reliability for the machine learning task at hand. For example, [**Pima Indians Diabetes Dataset**](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database) is well-aligned with the goal of predicting diabetes, as it comes from a reliable source, the National Library of Medicine, is based on standardized medical examinations, and provides a sufficient sample size with 768 observations x 8 features for meaningful model training and evaluation.
 
-Before diving into the modeling phase, it’s essential to load and explore the data. This includes checking for missing values, understanding the distribution of features, and visualizing relationships between features and the target variable. The goal here is to develop a strong understanding of the dataset's structure and characteristics.
+#### **Exploring Data Analysis**
+
+Before diving into the modeling phase, it’s essential to load and explore the data. This includes checking for missing values, understanding the distribution of features, and visualizing relationships between features and the target variable. The goal here is to develop a strong understanding of the dataset's structure and characteristics. 
 
 For example, you can analyze how glucose levels, BMI, and age are distributed for diabetic vs. non-diabetic patients. This exploration often helps identify patterns or trends that inform feature engineering later in the process.
 

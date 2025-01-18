@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Yuci Jenny Zhang">
-<meta name="dcterms.date" content="2025-01-18">
 
-<title>A Comprehensive Guide to the Machine Learning Process: A Step-by-Step Tutorial – Data Science Blog</title>
+<title>A Comprehensive Guide to the Machine Learning Process – Data Science Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,7 +113,8 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">A Comprehensive Guide to the Machine Learning Process: A Step-by-Step Tutorial</h1>
+      <h1 class="title">A Comprehensive Guide to the Machine Learning Process</h1>
+            <p class="subtitle lead">A Step-by-Step Tutorial Demonstrated with Logistic Regression Using the Pima Indians Diabetes Dataset</p>
                                 <div class="quarto-categories">
                 <div class="quarto-category">tutorial</div>
                 <div class="quarto-category">code</div>
@@ -127,19 +126,7 @@ ul.task-list li input[type="checkbox"] {
   
   <div class="quarto-title-meta">
 
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Yuci Jenny Zhang </p>
-            </div>
-    </div>
       
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">January 18, 2025</p>
-      </div>
-    </div>
     
       
     </div>
@@ -156,31 +143,34 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>Machine learning (ML) is a powerful tool for solving complex problems by identifying patterns in data. However, to build a successful machine learning model, it’s essential to follow a structured process that takes raw data and transforms it into actionable insights. In this tutorial, we’ll walk through the entire machine learning process, from defining the problem to evaluating the model, using a real-world dataset—specifically, the <strong>Pima Indians Diabetes Dataset</strong>.</p>
-<p>The Pima Indians dataset is a popular dataset in the data science community, used to predict whether a person has diabetes based on several clinical features such as glucose levels, BMI, age, and blood pressure. By following this tutorial, you’ll gain insights into how each step of the machine learning process works and how to apply it to a real dataset.</p>
-<hr>
-<section id="step-1-define-the-problem" class="level2">
-<h2 class="anchored" data-anchor-id="step-1-define-the-problem"><strong>Step 1: Define the Problem</strong></h2>
-<p>The first step in any machine learning project is to clearly define the problem you’re trying to solve. Without a well-defined problem, it’s impossible to identify what type of model to use or how to evaluate success. In this tutorial, the problem is:</p>
-<p><strong>“Can we predict whether a woman has diabetes based on her clinical features?”</strong></p>
-<p>This is a binary classification problem, where the output variable is whether or not the patient has diabetes. The output variable, known as the <strong>target variable</strong>, has two classes: 0 (no diabetes) or 1 (diabetes).</p>
-</section>
-<section id="step-2-collect-and-understand-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="step-2-collect-and-understand-the-data"><strong>Step 2: Collect and Understand the Data</strong></h2>
-<p>Before applying any machine learning techniques, it’s crucial to understand the data you’re working with. The <strong>Pima Indians Diabetes Dataset</strong> contains data for 768 female patients, each with 8 features:</p>
+<p>Machine learning (ML) is a powerful tool for solving complex problems by identifying patterns in data. However, to build a successful machine learning model, it’s essential to follow a structured process that takes raw data and transforms it into actionable insights. In this tutorial, I will walk through the essential steps of the ML process using a real-world dataset: the <strong>Pima Indians Diabetes Dataset</strong>.</p>
+<p>You can find all of my source code that supports this article in the GitHub repository <a href="https://github.com/UBC-MDS/diabetes_predictor_py">here</a> and the final reasearch report <a href="https://ubc-mds.github.io/diabetes_predictor_py/reports/diabetes_analysis.html">here</a>.</p>
+<section id="step-1-define-the-problem" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-define-the-problem"><strong>Step 1: Define the Problem</strong></h3>
+<p>Before diving into code or models, the first step is always to <strong>define the problem</strong> clearly. Understanding the business problem or the task you are trying to solve is critical, as it determines the approach and the tools you’ll use.</p>
 <ul>
-<li><strong>Pregnancies</strong>: Number of pregnancies</li>
-<li><strong>Glucose</strong>: Plasma glucose concentration (a measure of blood sugar)</li>
-<li><strong>Blood Pressure</strong>: Diastolic blood pressure (mm Hg)</li>
-<li><strong>Skin Thickness</strong>: Triceps skinfold thickness (mm)</li>
-<li><strong>Insulin</strong>: Serum insulin level (mu U/ml)</li>
-<li><strong>BMI</strong>: Body mass index (weight in kg / height in meters squared)</li>
-<li><strong>Diabetes Pedigree Function</strong>: A family history score for diabetes</li>
-<li><strong>Age</strong>: Age of the patient (in years)</li>
+<li><strong>What problem are you trying to solve?</strong></li>
+<li><strong>Is it a classification task, regression task, or clustering task?</strong></li>
+<li><strong>What kind of data do you have, and what’s the expected output?</strong></li>
 </ul>
-<p>The target variable is <strong>Outcome</strong>, which is a binary value: 1 if the patient has diabetes, 0 if not.</p>
-<section id="exploring-the-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="exploring-the-dataset"><strong>Exploring the Dataset</strong></h3>
+<p>In this tutorial and based on our example dataset, our goal is to predict whether a person has diabetes based on features like glucose levels, BMI, and age. This is a binary classification problem, where the output variable is whether or not the patient has diabetes.</p>
+</section>
+<section id="step-2-collect-and-understand-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-collect-and-understand-the-data"><strong>Step 2: Collect and Understand the Data</strong></h3>
+<p>Machine learning models rely on high-quality data to learn and make predictions, so it is crucial to understand the data before applying any machine learning techniques.</p>
+<section id="source-collection-and-scope-of-data" class="level4">
+<h4 class="anchored" data-anchor-id="source-collection-and-scope-of-data">Source, Collection, and Scope of Data</h4>
+<p>The first step in understanding any dataset is to gain a high-level overview of its source, collection process, and scope. This involves answering the following questions:</p>
+<ul>
+<li><strong>Where is the data coming from?</strong></li>
+<li><strong>How was the data collected?</strong></li>
+<li><strong>How many observations are there?</strong></li>
+<li><strong>What relevant features are available?</strong></li>
+</ul>
+<p>By understanding these aspects, you can assess the dataset’s relevance and reliability for the machine learning task at hand. For example, <a href="https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database"><strong>Pima Indians Diabetes Dataset</strong></a> is well-aligned with the goal of predicting diabetes, as it comes from a reliable source, the National Library of Medicine, is based on standardized medical examinations, and provides a sufficient sample size with 768 observations x 8 features for meaningful model training and evaluation.</p>
+</section>
+<section id="exploring-data-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="exploring-data-analysis"><strong>Exploring Data Analysis</strong></h4>
 <p>Before diving into the modeling phase, it’s essential to load and explore the data. This includes checking for missing values, understanding the distribution of features, and visualizing relationships between features and the target variable. The goal here is to develop a strong understanding of the dataset’s structure and characteristics.</p>
 <p>For example, you can analyze how glucose levels, BMI, and age are distributed for diabetic vs.&nbsp;non-diabetic patients. This exploration often helps identify patterns or trends that inform feature engineering later in the process.</p>
 </section>

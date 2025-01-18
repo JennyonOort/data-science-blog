@@ -2,77 +2,63 @@
   {
     "objectID": "posts/data-science/index.html",
     "href": "posts/data-science/index.html",
-    "title": "A Comprehensive Guide to the Machine Learning Process: A Step-by-Step Tutorial",
+    "title": "A Comprehensive Guide to the Machine Learning Process",
     "section": "",
-    "text": "Machine learning (ML) is a powerful tool for solving complex problems by identifying patterns in data. However, to build a successful machine learning model, it’s essential to follow a structured process that takes raw data and transforms it into actionable insights. In this tutorial, we’ll walk through the entire machine learning process, from defining the problem to evaluating the model, using a real-world dataset—specifically, the Pima Indians Diabetes Dataset.\nThe Pima Indians dataset is a popular dataset in the data science community, used to predict whether a person has diabetes based on several clinical features such as glucose levels, BMI, age, and blood pressure. By following this tutorial, you’ll gain insights into how each step of the machine learning process works and how to apply it to a real dataset."
-  },
-  {
-    "objectID": "posts/data-science/index.html#step-1-define-the-problem",
-    "href": "posts/data-science/index.html#step-1-define-the-problem",
-    "title": "A Comprehensive Guide to the Machine Learning Process: A Step-by-Step Tutorial",
-    "section": "Step 1: Define the Problem",
-    "text": "Step 1: Define the Problem\nThe first step in any machine learning project is to clearly define the problem you’re trying to solve. Without a well-defined problem, it’s impossible to identify what type of model to use or how to evaluate success. In this tutorial, the problem is:\n“Can we predict whether a woman has diabetes based on her clinical features?”\nThis is a binary classification problem, where the output variable is whether or not the patient has diabetes. The output variable, known as the target variable, has two classes: 0 (no diabetes) or 1 (diabetes)."
-  },
-  {
-    "objectID": "posts/data-science/index.html#step-2-collect-and-understand-the-data",
-    "href": "posts/data-science/index.html#step-2-collect-and-understand-the-data",
-    "title": "A Comprehensive Guide to the Machine Learning Process: A Step-by-Step Tutorial",
-    "section": "Step 2: Collect and Understand the Data",
-    "text": "Step 2: Collect and Understand the Data\nBefore applying any machine learning techniques, it’s crucial to understand the data you’re working with. The Pima Indians Diabetes Dataset contains data for 768 female patients, each with 8 features:\n\nPregnancies: Number of pregnancies\nGlucose: Plasma glucose concentration (a measure of blood sugar)\nBlood Pressure: Diastolic blood pressure (mm Hg)\nSkin Thickness: Triceps skinfold thickness (mm)\nInsulin: Serum insulin level (mu U/ml)\nBMI: Body mass index (weight in kg / height in meters squared)\nDiabetes Pedigree Function: A family history score for diabetes\nAge: Age of the patient (in years)\n\nThe target variable is Outcome, which is a binary value: 1 if the patient has diabetes, 0 if not.\n\nExploring the Dataset\nBefore diving into the modeling phase, it’s essential to load and explore the data. This includes checking for missing values, understanding the distribution of features, and visualizing relationships between features and the target variable. The goal here is to develop a strong understanding of the dataset’s structure and characteristics.\nFor example, you can analyze how glucose levels, BMI, and age are distributed for diabetic vs. non-diabetic patients. This exploration often helps identify patterns or trends that inform feature engineering later in the process."
+    "text": "Machine learning (ML) is a powerful tool for solving complex problems by identifying patterns in data. However, to build a successful machine learning model, it’s essential to follow a structured process that takes raw data and transforms it into actionable insights. In this tutorial, I will walk through the essential steps of the ML process using a real-world dataset: the Pima Indians Diabetes Dataset.\nYou can find all of my source code that supports this article in the GitHub repository here and the final reasearch report here."
   },
   {
     "objectID": "posts/data-science/index.html#step-3-data-preprocessing",
     "href": "posts/data-science/index.html#step-3-data-preprocessing",
-    "title": "A Comprehensive Guide to the Machine Learning Process: A Step-by-Step Tutorial",
+    "title": "A Comprehensive Guide to the Machine Learning Process",
     "section": "Step 3: Data Preprocessing",
     "text": "Step 3: Data Preprocessing\nRaw data often needs to be cleaned and transformed before it can be used in a machine learning model. This step is known as data preprocessing and typically includes the following actions:\n\nHandling Missing Data\nBefore building a model, it’s essential to handle any missing or invalid values in the dataset. In the Pima Indians dataset, some records may contain missing values for certain features, especially glucose and insulin levels.\nYou can handle missing data by:\n\nRemoving rows with missing values if they are few.\nImputing values for missing data, for example, by replacing missing values with the median or mean of the column.\n\n\n\nFeature Scaling\nMany machine learning algorithms, including logistic regression, benefit from scaling the features to a similar range. This ensures that one feature (e.g., age) doesn’t disproportionately influence the model compared to other features (e.g., glucose).\nFeature scaling is typically done through standardization or normalization. Standardization ensures that each feature has a mean of 0 and a standard deviation of 1.\n\n\nFeature Engineering\nFeature engineering refers to creating new features from existing ones to better represent the underlying patterns in the data. This could include creating polynomial features, encoding categorical variables, or even aggregating multiple features.\nIn our case, the dataset already contains structured numeric data, but feature engineering could involve interaction terms or transformations to better capture relationships between features."
   },
   {
     "objectID": "posts/data-science/index.html#step-4-split-the-data-into-training-and-testing-sets",
     "href": "posts/data-science/index.html#step-4-split-the-data-into-training-and-testing-sets",
-    "title": "A Comprehensive Guide to the Machine Learning Process: A Step-by-Step Tutorial",
+    "title": "A Comprehensive Guide to the Machine Learning Process",
     "section": "Step 4: Split the Data into Training and Testing Sets",
     "text": "Step 4: Split the Data into Training and Testing Sets\nTo evaluate how well your model generalizes to new, unseen data, it’s important to split the data into two subsets: one for training and one for testing.\nA common split is 70% for training and 30% for testing. The training set is used to train the model, while the test set is kept aside until the end to evaluate the model’s performance. In addition to this, it’s often useful to create a validation set for hyperparameter tuning."
   },
   {
     "objectID": "posts/data-science/index.html#step-5-choose-a-model",
     "href": "posts/data-science/index.html#step-5-choose-a-model",
-    "title": "A Comprehensive Guide to the Machine Learning Process: A Step-by-Step Tutorial",
+    "title": "A Comprehensive Guide to the Machine Learning Process",
     "section": "Step 5: Choose a Model",
     "text": "Step 5: Choose a Model\nOnce the data is cleaned and preprocessed, the next step is to select a machine learning model. The choice of model depends on the problem type, the nature of the data, and the available computational resources.\nIn this case, since we’re dealing with a binary classification problem, we chose Logistic Regression. Logistic regression is a simple and effective model for binary classification problems and is easy to interpret. It models the probability of a binary outcome based on the input features.\nThere are other models that could be used here, such as Decision Trees, Random Forests, or Support Vector Machines (SVM), but logistic regression is a good starting point for binary classification tasks."
   },
   {
     "objectID": "posts/data-science/index.html#step-6-train-the-model",
     "href": "posts/data-science/index.html#step-6-train-the-model",
-    "title": "A Comprehensive Guide to the Machine Learning Process: A Step-by-Step Tutorial",
+    "title": "A Comprehensive Guide to the Machine Learning Process",
     "section": "Step 6: Train the Model",
     "text": "Step 6: Train the Model\nOnce you’ve selected the model, it’s time to train it on the training data. Training involves feeding the features and corresponding target values to the model so that it can learn the patterns and relationships between them.\nFor logistic regression, the model will find the best-fit coefficients for the features to minimize the cost function (e.g., the log-loss function). The goal is to optimize the model to make accurate predictions for new data.\n\nHyperparameter Tuning\nFor many machine learning models, there are hyperparameters that need to be tuned to optimize performance. For logistic regression, one important hyperparameter is C, which controls the regularization strength (the trade-off between fitting the data well and preventing overfitting).\nYou can use methods like Grid Search or Randomized Search to find the optimal value of C that minimizes the model’s error rate. This is crucial for improving model performance and preventing overfitting or underfitting."
   },
   {
     "objectID": "posts/data-science/index.html#step-7-evaluate-the-model",
     "href": "posts/data-science/index.html#step-7-evaluate-the-model",
-    "title": "A Comprehensive Guide to the Machine Learning Process: A Step-by-Step Tutorial",
+    "title": "A Comprehensive Guide to the Machine Learning Process",
     "section": "Step 7: Evaluate the Model",
     "text": "Step 7: Evaluate the Model\nAfter training the model, it’s essential to evaluate its performance on the test set. Evaluation allows us to measure how well the model generalizes to unseen data.\n\nAccuracy and Confusion Matrix\nFor classification tasks, a common evaluation metric is accuracy, which measures the proportion of correctly classified instances. However, accuracy alone might not provide a full picture, especially if the dataset is imbalanced (as in our case with more non-diabetic patients than diabetic ones).\nTo better understand the model’s performance, we use a confusion matrix, which breaks down the predictions into four categories:\n\nTrue Positives (TP): Correctly predicted diabetic cases\nTrue Negatives (TN): Correctly predicted non-diabetic cases\nFalse Positives (FP): Non-diabetic cases incorrectly predicted as diabetic\nFalse Negatives (FN): Diabetic cases incorrectly predicted as non-diabetic\n\nThe confusion matrix helps us calculate additional metrics, such as Precision, Recall, and the F1-Score, which give a more nuanced understanding of the model’s strengths and weaknesses.\n\n\nPrecision, Recall, and F1-Score\n\nPrecision measures how many of the positive predictions are actually correct.\nRecall measures how many actual positive cases were correctly identified.\nF1-Score is the harmonic mean of Precision and Recall and provides a balanced measure of a model’s performance when there’s an imbalance between classes.\n\n\n\nROC Curve and AUC\nThe Receiver Operating Characteristic (ROC) Curve and Area Under the Curve (AUC) are useful for evaluating binary classifiers. The ROC curve plots the True Positive Rate (Recall) against the False Positive Rate. AUC is the area under this curve, where a higher AUC indicates better model performance."
   },
   {
     "objectID": "posts/data-science/index.html#step-8-refine-the-model",
     "href": "posts/data-science/index.html#step-8-refine-the-model",
-    "title": "A Comprehensive Guide to the Machine Learning Process: A Step-by-Step Tutorial",
+    "title": "A Comprehensive Guide to the Machine Learning Process",
     "section": "Step 8: Refine the Model",
     "text": "Step 8: Refine the Model\nAfter evaluating the model, you might find areas for improvement. This could involve:\n\nFeature Engineering: Trying new features or transformations\nHyperparameter Tuning: Using more advanced techniques like cross-validation to fine-tune the model’s parameters\nTrying Different Models: If logistic regression doesn’t perform well, you might try models like Random Forests or Gradient Boosting."
   },
   {
     "objectID": "posts/data-science/index.html#step-9-deploy-the-model",
     "href": "posts/data-science/index.html#step-9-deploy-the-model",
-    "title": "A Comprehensive Guide to the Machine Learning Process: A Step-by-Step Tutorial",
+    "title": "A Comprehensive Guide to the Machine Learning Process",
     "section": "Step 9: Deploy the Model",
     "text": "Step 9: Deploy the Model\nOnce your model is refined and performing well, it’s time to deploy it into a production environment. In a real-world scenario, this could involve:\n\nBuilding an application or API that uses the model to make predictions in real time.\nMonitoring the model’s performance over time to ensure it continues to perform well with new data.\nUpdating the model periodically with new data to ensure it remains accurate and effective."
   },
   {
     "objectID": "posts/data-science/index.html#conclusion",
     "href": "posts/data-science/index.html#conclusion",
-    "title": "A Comprehensive Guide to the Machine Learning Process: A Step-by-Step Tutorial",
+    "title": "A Comprehensive Guide to the Machine Learning Process",
     "section": "Conclusion",
     "text": "Conclusion\nIn this tutorial, we’ve walked through the entire machine learning process, , using the Pima Indians Diabetes Dataset as a practical example. We discussed how to define the problem, collect and preprocess data, train a logistic regression model, evaluate its performance, and refine it for better accuracy. Each of these steps is crucial in building an effective machine learning model that can be used for real-world applications.\nThe Pima Indians dataset demonstrated that logistic regression is a useful tool for binary classification problems, but it also showed the importance of feature selection, hyperparameter tuning, and model evaluation in achieving the best possible results.\nMachine learning is an iterative process that requires experimentation and refinement. As you progress in your data science journey, these foundational steps will serve as a guide to solving increasingly complex problems and making data-driven decisions."
   },
@@ -88,6 +74,6 @@
     "href": "index.html",
     "title": "blog",
     "section": "",
-    "text": "A Comprehensive Guide to the Machine Learning Process: A Step-by-Step Tutorial\n\n\n\n\n\n\ntutorial\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nJan 18, 2025\n\n\nYuci Jenny Zhang\n\n\n\n\n\n\nNo matching items"
+    "text": "A Comprehensive Guide to the Machine Learning Process\n\n\nA Step-by-Step Tutorial Demonstrated with Logistic Regression Using the Pima Indians Diabetes Dataset\n\n\n\ntutorial\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]
