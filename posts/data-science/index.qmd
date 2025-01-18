@@ -8,10 +8,9 @@ image: "img/image.jpg"
 ---
 ![](img/banner_word.png) 
 
-Machine learning (ML) is a powerful tool for solving complex problems by identifying patterns in data. However, to build a successful machine learning model, it's essential to follow a structured process that takes raw data and transforms it into actionable insights. In this tutorial, I will walk through the essential steps of the ML process using logistic regression model on a real-world dataset: the [Pima Indians Diabetes Dataset](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database) (the diabetes dataset).
+In recent years, data has been heralded as the world’s most valuable resource, surpassing even oil in importance. Organizations across all industries are making significant investments in data and analytics, with machine learning (ML) and AI being key drivers of IT spending. While these technologies offer a competitive edge, they also come with risks—mistakes driven by machine learning models can have serious consequences, from damaging an organization’s reputation to impacting revenue or even human lives. Therefore, it is crucial not only to understand the data but also to ensure the tools used are well-understood and aligned with the organization's values. A structured, well-defined machine learning process is essential to mitigate risks and maximize the potential of these powerful technologies, ensuring responsible and effective use throughout.
 
-THe demo is coded in [Python](https://www.python.org/) and the primary machine learning software for modeling is [scikit-learn](https://scikit-learn.org/stable/), which is an open-source library for Python that offers an extensive range of supervised and unsupervised learning algorithms and tools for machine learning tasks. You can find all source code that supports the demo in this [GitHub repository](https://github.com/UBC-MDS/diabetes_predictor_py) and the final research report [here](https://ubc-mds.github.io/diabetes_predictor_py/reports/diabetes_analysis.html).
-
+In this tutorial, I will walk through the essential steps of the ML process using logistic regression model on a real-world dataset: the [Pima Indians Diabetes Dataset](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database) (the diabetes dataset). THe demo is coded in [Python](https://www.python.org/) and the primary machine learning software for modeling is [scikit-learn](https://scikit-learn.org/stable/), which is an open-source library for Python that offers an extensive range of supervised and unsupervised learning algorithms and tools for machine learning tasks. You can find all source code that supports the demo in this [GitHub repository](https://github.com/UBC-MDS/diabetes_predictor_py) and the final research report [here](https://ubc-mds.github.io/diabetes_predictor_py/reports/diabetes_analysis.html).
 
 ### **Step 1: Define the Problem**
 
@@ -137,7 +136,9 @@ Common techniques for hyperparameter tuning include:
 - **Random Search**, which samples hyperparameters randomly from a specified range. 
 - **Advanced techniques** such as [Bayesian optimization](https://github.com/bayesian-optimization/BayesianOptimization), [genetic algorithms (GA)](https://medium.com/@byanalytixlabs/a-complete-guide-to-genetic-algorithm-advantages-limitations-more-738e87427dbb), [hyperband](https://2020blogfor.github.io/posts/2020/04/hyperband/), etc.
 
-In the demo, the goal is to optimize the model to make accurate predictions for new data. The model finds the best-fit coefficients for the features to minimize the cost function (e.g., the log-loss function) for logistic regression. We've using `RandomizedSearchCV` to find the optimal regularization strength that minimizes the model's error rate.
+In the demo, the goal is to optimize the model to make accurate predictions for new data. The model finds the best-fit coefficients (see @fig-coeff_table) for the features to minimize the cost function (e.g., the log-loss function) for logistic regression. We've using `RandomizedSearchCV` to find the optimal regularization strength that minimizes the model's error rate.
+
+![Logistic regression feature importance measured by coefficients. Image by Author](figures/coeff_table.png){#fig-coeff_table width=90%}
 
 ### **Step 8: Evaluate the Model**
 
@@ -185,4 +186,4 @@ In this tutorial, we’ve covered the complete machine learning process (@fig-fl
 
 Machine learning is an iterative and evolving process that involves continuous experimentation and refinement. As you advance in your data science journey, the principles outlined in this tutorial will guide you in tackling more complex challenges and making data-driven decisions. 
 
-![Machine learning complete process flowchart. Image by Author](figures/flowchart.png){#fig-flowchart width=50%}
+![Machine learning complete process flowchart. Image by Author](figures/flowchart.png){#fig-flowchart width=40%}
