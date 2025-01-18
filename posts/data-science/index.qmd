@@ -2,10 +2,13 @@
 title: "Unpacking the Machine Learning Process: A Practical Step-by-Step Guide"
 subtitle: "Hands-On Demo with Logistic Regression on the Pima Indians Diabetes Dataset"
 categories: [tutorial, code, analysis]
-image: "image.jpg"
+title-block-banner: "img/title_banner.jpg"
+title-block-banner-color: white
+image: "img/image.jpg"
 ---
+![](img/banner_word.png) 
 
-Machine learning (ML) is a powerful tool for solving complex problems by identifying patterns in data. However, to build a successful machine learning model, it's essential to follow a structured process that takes raw data and transforms it into actionable insights. In this tutorial, I will walk through the essential steps of the ML process using logistic regression model on a real-world dataset: the [Pima Indians Diabetes Dataset](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database) (the 'diabetes dataset').
+Machine learning (ML) is a powerful tool for solving complex problems by identifying patterns in data. However, to build a successful machine learning model, it's essential to follow a structured process that takes raw data and transforms it into actionable insights. In this tutorial, I will walk through the essential steps of the ML process using logistic regression model on a real-world dataset: the [Pima Indians Diabetes Dataset](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database) (the diabetes dataset).
 
 THe demo is coded in [Python](https://www.python.org/) and the primary machine learning software for modeling is [scikit-learn](https://scikit-learn.org/stable/), which is an open-source library for Python that offers an extensive range of supervised and unsupervised learning algorithms and tools for machine learning tasks. You can find all source code that supports the demo in this [GitHub repository](https://github.com/UBC-MDS/diabetes_predictor_py) and the final research report [here](https://ubc-mds.github.io/diabetes_predictor_py/reports/diabetes_analysis.html).
 
@@ -122,10 +125,10 @@ For this tutorial, we chose **Logistic Regression**, a simple yet powerful model
 
 Once we’ve selected the model, it’s time to train it on the training data. Training involves feeding the features and corresponding target values to the model so that it can learn the patterns and relationships between them.
 
-#### <u>Cross Validation</u>
+#### [<u>Cross Validation</u>]((https://www.youtube.com/watch?v=fSytzGwwBVw) )
 Typically, we use cross-validation technique during training to improve the generalization ability of a machine learning model. It works by splitting the training data into multiple subsets, training the model on some folds, and validating it on the remaining fold. This process is repeated for each fold, and the average performance (along with standard deviation) is used to assess the model. Cross-validation helps mitigate overfitting and provides a more reliable estimate of the model's performance on unseen data.
 
-#### <u>Hyperparameter Tuning</u>
+#### [<u>Hyperparameter Tuning</u>](https://scikit-learn.org/stable/modules/grid_search.html#)
 For many machine learning models, there are hyperparameters that need to be tuned to optimize performance. Unlike model parameters, which are learned during training, hyperparameters are set before training and control the model's learning process. Examples of hyperparameters include the learning rate in gradient descent, the number of trees in a random forest, or the regularization strength in logistic regression. Fine-tuning these hyperparameters can significantly impact the model's ability to generalize to unseen data. 
 
 Common techniques for hyperparameter tuning include: 
@@ -143,13 +146,13 @@ After training the model, it’s essential to evaluate its performance on the te
 #### <u>Evaluation Metrics</u>
 Evaluation metrics help quantify this generalization by comparing the model’s predictions against the true outcomes. The choice of evaluation metrics depends on the type of problem and the characteristics of the data.
 
-- **Classification Metrics:** accuracy, precision, recall, f1-score, fbeta-score, ROC curve and AUC, PR curve and AP
+- **Classification Metrics:** accuracy, precision, recall, f1-score, fbeta-score, receiver-operating characteristic (ROC) curve and AUC, precision-recall (PR) curve and average precision (AP)
 - **Regression Metrics:** mean squared error (MSE), mean absolute error (MAE), mean absolute percentage error (mape), and R-squared ($R^2$)
 - **Clustering Metrics:** Clustering is an unsupervised learning task, and its evaluation metrics typically focus on measuring the similarity or compactness of the clusters formed. Evaluation metrics can be categorized into internal metrics, which assess clustering quality based solely on the data itself, and external metrics, which compare the clusters to pre-defined categories or ground truth.
-    * <u>_Internal metrics:_</u> silhouette score, Davies-Bouldin index, and Dunn index
-    * <u>_External metrics:_</u> Adjusted Rand Index (ARI), Normalized Mutual Information (NMI), and Fowlkes-Mallows Index (FMI) 
+    * <u>_Internal metrics:_</u> [silhouette score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.silhouette_score.html), [Davies-Bouldin index](https://en.wikipedia.org/wiki/Davies%E2%80%93Bouldin_index), and [Dunn index](https://en.wikipedia.org/wiki/Dunn_index)
+    * <u>_External metrics:_</u> [Adjusted Rand Index (ARI)](https://en.wikipedia.org/wiki/Rand_index), [Normalized Mutual Information (NMI)](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.normalized_mutual_info_score.html), and [Fowlkes-Mallows Index (FMI)](https://en.wikipedia.org/wiki/Fowlkes%E2%80%93Mallows_index) 
 
-Generally, accuracy for classification and mean squared error (MSE) for regression are set as default evaluation metrics in most machine learning software packages.
+Generally, accuracy for classification and mean squared error (MSE) for regression are set as default evaluation metrics in most machine learning software packages. For any classificatoin and regression metrics mentioned above that are unclear, please refer to the [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course/) offered by Google, which is an excellent resource.  
 
 For the sample analysis, the model reported an accuracy score of 75%. More in depth evaluation of test set predictions include confusion matrix (@fig-test_confusion_matrix), PR curve (@fig-test_pr), and (@fig-test_roc). 
 
@@ -178,6 +181,8 @@ Our demo has skipped through [step 9](#step-9-refine-the-model) and [10](#step-1
 
 ### **Conclusion**
 
-In this tutorial, we’ve covered the complete machine learning process using the Pima Indians Diabetes Dataset as a practical example. We explored how to define the problem, collect, split, and preprocess the data, train a model, evaluate its performance, and refine it for improved performance. Each of these steps is essential for building a robust machine learning model capable of solving real-world problems.
+In this tutorial, we’ve covered the complete machine learning process (@fig-flowchart) using the Pima Indians Diabetes Dataset as a practical example. We explored how to define the problem, collect, split, and preprocess the data, train a model, evaluate its performance, and refine it for improved performance. Each of these steps is essential for building a robust machine learning model capable of solving real-world problems.
 
-Machine learning is an iterative and evolving process that involves continuous experimentation and refinement. As you advance in your data science journey, the principles outlined in this tutorial will guide you in tackling more complex challenges and making data-driven decisions.
+Machine learning is an iterative and evolving process that involves continuous experimentation and refinement. As you advance in your data science journey, the principles outlined in this tutorial will guide you in tackling more complex challenges and making data-driven decisions. 
+
+![Machine learning complete process flowchart. Image by Author](figures/flowchart.png){#fig-flowchart width=50%}

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Unpacking the Machine Learning Process: A Practical Step-by-Step Guide – Data Science Blog</title>
+<title>Unpacking the Machine Learning Process: A Practical Step-by-Step Guide – Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,6 +66,24 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<style>
+
+      .quarto-title-block .quarto-title-banner h1,
+      .quarto-title-block .quarto-title-banner h2,
+      .quarto-title-block .quarto-title-banner h3,
+      .quarto-title-block .quarto-title-banner h4,
+      .quarto-title-block .quarto-title-banner h5,
+      .quarto-title-block .quarto-title-banner h6
+      {
+        color: white;
+      }
+
+      .quarto-title-block .quarto-title-banner {
+        color: white;
+background-image: url(img/title_banner.jpg);
+background-size: cover;
+      }
+</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -108,7 +126,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Data Science Blog</span>
+    <span class="navbar-title">Blog</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -172,7 +190,8 @@ window.Quarto = {
 
 
 
-<p>Machine learning (ML) is a powerful tool for solving complex problems by identifying patterns in data. However, to build a successful machine learning model, it’s essential to follow a structured process that takes raw data and transforms it into actionable insights. In this tutorial, I will walk through the essential steps of the ML process using logistic regression model on a real-world dataset: the <a href="https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database">Pima Indians Diabetes Dataset</a> (the ‘diabetes dataset’).</p>
+<p><img src="img/banner_word.png" class="img-fluid"></p>
+<p>Machine learning (ML) is a powerful tool for solving complex problems by identifying patterns in data. However, to build a successful machine learning model, it’s essential to follow a structured process that takes raw data and transforms it into actionable insights. In this tutorial, I will walk through the essential steps of the ML process using logistic regression model on a real-world dataset: the <a href="https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database">Pima Indians Diabetes Dataset</a> (the diabetes dataset).</p>
 <p>THe demo is coded in <a href="https://www.python.org/">Python</a> and the primary machine learning software for modeling is <a href="https://scikit-learn.org/stable/">scikit-learn</a>, which is an open-source library for Python that offers an extensive range of supervised and unsupervised learning algorithms and tools for machine learning tasks. You can find all source code that supports the demo in this <a href="https://github.com/UBC-MDS/diabetes_predictor_py">GitHub repository</a> and the final research report <a href="https://ubc-mds.github.io/diabetes_predictor_py/reports/diabetes_analysis.html">here</a>.</p>
 <section id="step-1-define-the-problem" class="level3">
 <h3 class="anchored" data-anchor-id="step-1-define-the-problem"><strong>Step 1: Define the Problem</strong></h3>
@@ -293,11 +312,11 @@ Figure&nbsp;2: Pearson and Spearman correlations across all features. Image by A
 <h3 class="anchored" data-anchor-id="step-7-train-the-model"><strong>Step 7: Train the Model</strong></h3>
 <p>Once we’ve selected the model, it’s time to train it on the training data. Training involves feeding the features and corresponding target values to the model so that it can learn the patterns and relationships between them.</p>
 <section id="cross-validation" class="level4">
-<h4 class="anchored" data-anchor-id="cross-validation"><u>Cross Validation</u></h4>
+<h4 class="anchored" data-anchor-id="cross-validation"><a href="(https://www.youtube.com/watch?v=fSytzGwwBVw)"><u>Cross Validation</u></a></h4>
 <p>Typically, we use cross-validation technique during training to improve the generalization ability of a machine learning model. It works by splitting the training data into multiple subsets, training the model on some folds, and validating it on the remaining fold. This process is repeated for each fold, and the average performance (along with standard deviation) is used to assess the model. Cross-validation helps mitigate overfitting and provides a more reliable estimate of the model’s performance on unseen data.</p>
 </section>
 <section id="hyperparameter-tuning" class="level4">
-<h4 class="anchored" data-anchor-id="hyperparameter-tuning"><u>Hyperparameter Tuning</u></h4>
+<h4 class="anchored" data-anchor-id="hyperparameter-tuning"><a href="https://scikit-learn.org/stable/modules/grid_search.html#"><u>Hyperparameter Tuning</u></a></h4>
 <p>For many machine learning models, there are hyperparameters that need to be tuned to optimize performance. Unlike model parameters, which are learned during training, hyperparameters are set before training and control the model’s learning process. Examples of hyperparameters include the learning rate in gradient descent, the number of trees in a random forest, or the regularization strength in logistic regression. Fine-tuning these hyperparameters can significantly impact the model’s ability to generalize to unseen data.</p>
 <p>Common techniques for hyperparameter tuning include:</p>
 <ul>
@@ -315,15 +334,15 @@ Figure&nbsp;2: Pearson and Spearman correlations across all features. Image by A
 <h4 class="anchored" data-anchor-id="evaluation-metrics"><u>Evaluation Metrics</u></h4>
 <p>Evaluation metrics help quantify this generalization by comparing the model’s predictions against the true outcomes. The choice of evaluation metrics depends on the type of problem and the characteristics of the data.</p>
 <ul>
-<li><strong>Classification Metrics:</strong> accuracy, precision, recall, f1-score, fbeta-score, ROC curve and AUC, PR curve and AP</li>
+<li><strong>Classification Metrics:</strong> accuracy, precision, recall, f1-score, fbeta-score, receiver-operating characteristic (ROC) curve and AUC, precision-recall (PR) curve and average precision (AP)</li>
 <li><strong>Regression Metrics:</strong> mean squared error (MSE), mean absolute error (MAE), mean absolute percentage error (mape), and R-squared (<span class="math inline">\(R^2\)</span>)</li>
 <li><strong>Clustering Metrics:</strong> Clustering is an unsupervised learning task, and its evaluation metrics typically focus on measuring the similarity or compactness of the clusters formed. Evaluation metrics can be categorized into internal metrics, which assess clustering quality based solely on the data itself, and external metrics, which compare the clusters to pre-defined categories or ground truth.
 <ul>
-<li><u><em>Internal metrics:</em></u> silhouette score, Davies-Bouldin index, and Dunn index</li>
-<li><u><em>External metrics:</em></u> Adjusted Rand Index (ARI), Normalized Mutual Information (NMI), and Fowlkes-Mallows Index (FMI)</li>
+<li><u><em>Internal metrics:</em></u> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.silhouette_score.html">silhouette score</a>, <a href="https://en.wikipedia.org/wiki/Davies%E2%80%93Bouldin_index">Davies-Bouldin index</a>, and <a href="https://en.wikipedia.org/wiki/Dunn_index">Dunn index</a></li>
+<li><u><em>External metrics:</em></u> <a href="https://en.wikipedia.org/wiki/Rand_index">Adjusted Rand Index (ARI)</a>, <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.normalized_mutual_info_score.html">Normalized Mutual Information (NMI)</a>, and <a href="https://en.wikipedia.org/wiki/Fowlkes%E2%80%93Mallows_index">Fowlkes-Mallows Index (FMI)</a></li>
 </ul></li>
 </ul>
-<p>Generally, accuracy for classification and mean squared error (MSE) for regression are set as default evaluation metrics in most machine learning software packages.</p>
+<p>Generally, accuracy for classification and mean squared error (MSE) for regression are set as default evaluation metrics in most machine learning software packages. For any classificatoin and regression metrics mentioned above that are unclear, please refer to the <a href="https://developers.google.com/machine-learning/crash-course/">Machine Learning Crash Course</a> offered by Google, which is an excellent resource.</p>
 <p>For the sample analysis, the model reported an accuracy score of 75%. More in depth evaluation of test set predictions include confusion matrix (<a href="#fig-test_confusion_matrix" class="quarto-xref">Figure&nbsp;3</a>), PR curve (<a href="#fig-test_pr" class="quarto-xref">Figure&nbsp;4</a>), and (<a href="#fig-test_roc" class="quarto-xref">Figure&nbsp;5</a>).</p>
 <div id="fig-test_confusion_matrix" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -378,8 +397,18 @@ Figure&nbsp;5: ROC Curve and AUC score of test set predictions
 </section>
 <section id="conclusion" class="level3">
 <h3 class="anchored" data-anchor-id="conclusion"><strong>Conclusion</strong></h3>
-<p>In this tutorial, we’ve covered the complete machine learning process using the Pima Indians Diabetes Dataset as a practical example. We explored how to define the problem, collect, split, and preprocess the data, train a model, evaluate its performance, and refine it for improved performance. Each of these steps is essential for building a robust machine learning model capable of solving real-world problems.</p>
+<p>In this tutorial, we’ve covered the complete machine learning process (<a href="#fig-flowchart" class="quarto-xref">Figure&nbsp;6</a>) using the Pima Indians Diabetes Dataset as a practical example. We explored how to define the problem, collect, split, and preprocess the data, train a model, evaluate its performance, and refine it for improved performance. Each of these steps is essential for building a robust machine learning model capable of solving real-world problems.</p>
 <p>Machine learning is an iterative and evolving process that involves continuous experimentation and refinement. As you advance in your data science journey, the principles outlined in this tutorial will guide you in tackling more complex challenges and making data-driven decisions.</p>
+<div id="fig-flowchart" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-flowchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/flowchart.png" class="img-fluid figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-flowchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Machine learning complete process flowchart. Image by Author
+</figcaption>
+</figure>
+</div>
 
 
 </section>
