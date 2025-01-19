@@ -21,7 +21,7 @@ Before diving into code or models, the first step is always to **define the prob
 - **Is it a classification task, regression task, or clustering task?**
 - **What kind of data do we have, and what’s the expected output?**
 
-In this guide, our goal is to predict whether a person has diabetes based on clinical features like glucose levels, BMI, and age. This is a binary classification problem, where the output variable is whether or not the patient has diabetes. 
+In this guide, our goal is to predict whether a person has diabetes based on clinical features like glucose levels, BMI, age, etc. This is a binary classification problem, where the output variable is whether or not the patient has diabetes. 
 
 ### **Step 2: Understand and Validate the Data**
 
@@ -137,13 +137,13 @@ Common techniques for hyperparameter tuning include:
 - **Random Search**, which samples hyperparameters randomly from a specified range. 
 - **Advanced techniques** such as [Bayesian optimization](https://github.com/bayesian-optimization/BayesianOptimization), [genetic algorithms (GA)](https://medium.com/@byanalytixlabs/a-complete-guide-to-genetic-algorithm-advantages-limitations-more-738e87427dbb), [hyperband](https://2020blogfor.github.io/posts/2020/04/hyperband/), etc.
 
-In the demo, the goal is to optimize the model to make accurate predictions for new data. The model finds the best-fit coefficients (see @fig-coeff_table) for the features to minimize the cost function (e.g., the log-loss function) for logistic regression. We've using `RandomizedSearchCV` to find the optimal regularization strength that minimizes the model's error rate.
+In the demo, the goal is to optimize the model to make accurate predictions for new data. The model finds the best-fit feature coefficients (see @fig-coeff_table) through cross-validation to minimize the cost function (e.g., the log-loss function) for logistic regression. We've used `RandomizedSearchCV` to find the optimal regularization strength that minimizes the model's error rate.
 
 ![Logistic regression feature importance measured by coefficients. Image by Author](figures/coeff_table.png){#fig-coeff_table width=90%}
 
 ### **Step 8: Evaluate the Model**
 
-After training the model, it’s essential to evaluate its performance on the test set. Evaluation allows us to measure how well the model generalizes to new, unseen data.
+After training the model, it’s essential to evaluate its performance on the **test set**. Evaluation allows us to measure how well the model generalizes to new, unseen data.
 
 #### <u>Evaluation Metrics</u>
 Evaluation metrics help quantify this generalization by comparing the model’s predictions against the true outcomes. The choice of evaluation metrics depends on the type of problem and the characteristics of the data.

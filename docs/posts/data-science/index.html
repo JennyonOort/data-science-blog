@@ -221,7 +221,7 @@ window.Quarto = {
 <li><strong>Is it a classification task, regression task, or clustering task?</strong></li>
 <li><strong>What kind of data do we have, and what’s the expected output?</strong></li>
 </ul>
-<p>In this guide, our goal is to predict whether a person has diabetes based on clinical features like glucose levels, BMI, and age. This is a binary classification problem, where the output variable is whether or not the patient has diabetes.</p>
+<p>In this guide, our goal is to predict whether a person has diabetes based on clinical features like glucose levels, BMI, age, etc. This is a binary classification problem, where the output variable is whether or not the patient has diabetes.</p>
 </section>
 <section id="step-2-understand-and-validate-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="step-2-understand-and-validate-the-data"><strong>Step 2: Understand and Validate the Data</strong></h3>
@@ -344,7 +344,7 @@ Figure&nbsp;2: Pearson and Spearman correlations across all features. Image by A
 <li><strong>Random Search</strong>, which samples hyperparameters randomly from a specified range.</li>
 <li><strong>Advanced techniques</strong> such as <a href="https://github.com/bayesian-optimization/BayesianOptimization">Bayesian optimization</a>, <a href="https://medium.com/@byanalytixlabs/a-complete-guide-to-genetic-algorithm-advantages-limitations-more-738e87427dbb">genetic algorithms (GA)</a>, <a href="https://2020blogfor.github.io/posts/2020/04/hyperband/">hyperband</a>, etc.</li>
 </ul>
-<p>In the demo, the goal is to optimize the model to make accurate predictions for new data. The model finds the best-fit coefficients (see <a href="#fig-coeff_table" class="quarto-xref">Figure&nbsp;3</a>) for the features to minimize the cost function (e.g., the log-loss function) for logistic regression. We’ve using <code>RandomizedSearchCV</code> to find the optimal regularization strength that minimizes the model’s error rate.</p>
+<p>In the demo, the goal is to optimize the model to make accurate predictions for new data. The model finds the best-fit feature coefficients (see <a href="#fig-coeff_table" class="quarto-xref">Figure&nbsp;3</a>) through cross-validation to minimize the cost function (e.g., the log-loss function) for logistic regression. We’ve used <code>RandomizedSearchCV</code> to find the optimal regularization strength that minimizes the model’s error rate.</p>
 <div id="fig-coeff_table" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-coeff_table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -359,7 +359,7 @@ Figure&nbsp;3: Logistic regression feature importance measured by coefficients. 
 </section>
 <section id="step-8-evaluate-the-model" class="level3">
 <h3 class="anchored" data-anchor-id="step-8-evaluate-the-model"><strong>Step 8: Evaluate the Model</strong></h3>
-<p>After training the model, it’s essential to evaluate its performance on the test set. Evaluation allows us to measure how well the model generalizes to new, unseen data.</p>
+<p>After training the model, it’s essential to evaluate its performance on the <strong>test set</strong>. Evaluation allows us to measure how well the model generalizes to new, unseen data.</p>
 <section id="evaluation-metrics" class="level4">
 <h4 class="anchored" data-anchor-id="evaluation-metrics"><u>Evaluation Metrics</u></h4>
 <p>Evaluation metrics help quantify this generalization by comparing the model’s predictions against the true outcomes. The choice of evaluation metrics depends on the type of problem and the characteristics of the data.</p>
